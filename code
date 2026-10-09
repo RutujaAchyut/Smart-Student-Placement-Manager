@@ -1,0 +1,1546 @@
+public class Main{
+    public static void main(String[] args) {
+
+    java.util.Scanner scanner = new java.util.Scanner(System.in);
+
+    PlacementManager manager = new PlacementManager();
+
+    int choice;
+
+    do {
+
+        System.out.println("\n========================================");
+        System.out.println("     SMART STUDENT PLACEMENT MANAGER");
+        System.out.println("========================================");
+
+        System.out.println("1. Add Student");
+        System.out.println("2. View Students");
+        System.out.println("3. Add Company");
+        System.out.println("4. View Companies");
+        System.out.println("5. Smart Company Match");
+        System.out.println("6. Skill Gap Analyzer");
+        System.out.println("7. Placement Readiness Score");
+        System.out.println("8. Apply for Company");
+        System.out.println("9. View Applications");
+        System.out.println("10. Update Application Status");
+        System.out.println("11. Placement Dashboard");
+        System.out.println("12. Career Skill Recommender");
+        System.out.println("13. Exit");
+
+        System.out.print("\nEnter your choice: ");
+        choice = scanner.nextInt();
+
+        switch (choice) {
+
+            // =========================================
+            // ADD STUDENT
+            // =========================================
+
+            case 1:
+
+                System.out.println("\n===== ADD STUDENT =====");
+
+                System.out.print("Enter Student ID: ");
+                int studentId = scanner.nextInt();
+                scanner.nextLine();
+
+                System.out.print("Enter Name: ");
+                String name = scanner.nextLine();
+
+                System.out.print("Enter Branch: ");
+                String branch = scanner.nextLine();
+
+                System.out.print("Enter CGPA: ");
+                double cgpa = scanner.nextDouble();
+                scanner.nextLine();
+
+                System.out.print("Enter Skills (comma separated): ");
+                String skills = scanner.nextLine();
+
+                System.out.print("Enter Number of Backlogs: ");
+                int backlogs = scanner.nextInt();
+
+                Student student = new Student(
+                        studentId,
+                        name,
+                        branch,
+                        cgpa,
+                        skills,
+                        backlogs
+                );
+
+                manager.addStudent(student);
+
+                break;
+
+            // =========================================
+            // VIEW STUDENTS
+            // =========================================
+
+            case 2:
+
+                manager.displayStudents();
+
+                break;
+
+            // =========================================
+            // ADD COMPANY
+            // =========================================
+
+            case 3:
+
+                System.out.println("\n===== ADD COMPANY =====");
+
+                System.out.print("Enter Company ID: ");
+                int companyId = scanner.nextInt();
+                scanner.nextLine();
+
+                System.out.print("Enter Company Name: ");
+                String companyName = scanner.nextLine();
+
+                System.out.print("Enter Job Role: ");
+                String jobRole = scanner.nextLine();
+
+                System.out.print("Enter Minimum CGPA: ");
+                double minimumCgpa = scanner.nextDouble();
+                scanner.nextLine();
+
+                System.out.print("Enter Required Skill: ");
+                String requiredSkill = scanner.nextLine();
+
+                System.out.print("Enter Maximum Backlogs Allowed: ");
+                int maximumBacklogs = scanner.nextInt();
+
+                System.out.print("Enter Package (LPA): ");
+                double packageLpa = scanner.nextDouble();
+
+                Company company = new Company(
+                        companyId,
+                        companyName,
+                        jobRole,
+                        minimumCgpa,
+                        requiredSkill,
+                        maximumBacklogs,
+                        packageLpa
+                );
+
+                manager.addCompany(company);
+
+                break;
+
+            // =========================================
+            // VIEW COMPANIES
+            // =========================================
+
+            case 4:
+
+                manager.displayCompanies();
+
+                break;
+
+            // =========================================
+            // SMART COMPANY MATCH
+            // =========================================
+
+            case 5:
+
+                System.out.println("\n===== SMART COMPANY MATCH =====");
+
+                System.out.print("Enter Student ID: ");
+                int matchStudentId = scanner.nextInt();
+
+                System.out.print("Enter Company ID: ");
+                int matchCompanyId = scanner.nextInt();
+
+                manager.calculateMatch(
+                        matchStudentId,
+                        matchCompanyId
+                );
+
+                break;
+
+            // =========================================
+            // SKILL GAP ANALYZER
+            // =========================================
+
+            case 6:
+
+                System.out.println("\n===== SKILL GAP ANALYZER =====");
+
+                System.out.print("Enter Student ID: ");
+                int gapStudentId = scanner.nextInt();
+
+                System.out.print("Enter Company ID: ");
+                int gapCompanyId = scanner.nextInt();
+
+                manager.analyzeSkillGap(
+                        gapStudentId,
+                        gapCompanyId
+                );
+
+                break;
+
+            // =========================================
+            // PLACEMENT READINESS
+            // =========================================
+
+            case 7:
+
+                System.out.println("\n===== PLACEMENT READINESS =====");
+
+                System.out.print("Enter Student ID: ");
+                int readinessStudentId = scanner.nextInt();
+
+                manager.calculateReadinessScore(
+                        readinessStudentId
+                );
+
+                break;
+
+            // =========================================
+            // APPLY FOR COMPANY
+            // =========================================
+
+            case 8:
+
+                System.out.println("\n===== APPLY FOR COMPANY =====");
+
+                System.out.print("Enter Application ID: ");
+                int applicationId = scanner.nextInt();
+
+                System.out.print("Enter Student ID: ");
+                int applicationStudentId = scanner.nextInt();
+
+                System.out.print("Enter Company ID: ");
+                int applicationCompanyId = scanner.nextInt();
+
+                Application application = new Application(
+                        applicationId,
+                        applicationStudentId,
+                        applicationCompanyId,
+                        "Applied"
+                );
+
+                manager.addApplication(application);
+
+                break;
+
+            // =========================================
+            // VIEW APPLICATIONS
+            // =========================================
+
+            case 9:
+
+                manager.displayApplications();
+
+                break;
+
+            // =========================================
+            // UPDATE APPLICATION STATUS
+            // =========================================
+
+            case 10:
+
+                System.out.println("\n===== UPDATE APPLICATION STATUS =====");
+
+                System.out.print("Enter Application ID: ");
+                int updateApplicationId = scanner.nextInt();
+
+                System.out.println("\nSelect New Status:");
+                System.out.println("1. Applied");
+                System.out.println("2. Shortlisted");
+                System.out.println("3. Selected");
+                System.out.println("4. Rejected");
+
+                System.out.print("\nEnter your choice: ");
+                int statusChoice = scanner.nextInt();
+
+                String newStatus;
+
+                switch (statusChoice) {
+
+                    case 1:
+                        newStatus = "Applied";
+                        break;
+
+                    case 2:
+                        newStatus = "Shortlisted";
+                        break;
+
+                    case 3:
+                        newStatus = "Selected";
+                        break;
+
+                    case 4:
+                        newStatus = "Rejected";
+                        break;
+
+                    default:
+                        System.out.println("Invalid status choice.");
+                        continue;
+                }
+
+                manager.updateApplicationStatus(
+                        updateApplicationId,
+                        newStatus
+                );
+
+                break;
+
+            // =========================================
+            // PLACEMENT DASHBOARD
+            // =========================================
+
+            case 11:
+
+                manager.displayDashboard();
+
+                break;
+
+            // =========================================
+            // CAREER RECOMMENDER
+            // =========================================
+
+            case 12:
+
+                CareerRecommender.showRecommendations();
+
+                break;
+
+            // =========================================
+            // EXIT
+            // =========================================
+
+            case 13:
+
+                System.out.println("\nThank you for using");
+                System.out.println("Smart Student Placement Manager!");
+
+                break;
+
+            default:
+
+                System.out.println("\nInvalid choice!");
+                System.out.println("Please enter a number from 1 to 13.");
+        }
+
+    } while (choice != 13);
+
+    scanner.close();
+}
+}
+import java.awt.*;
+import javax.swing.*;
+
+public class PlacementGUI extends JFrame {
+
+    private JPanel contentPanel;
+
+    public PlacementGUI() {
+
+        setTitle("Smart Student Placement Manager");
+        setSize(1100, 650);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+        setLayout(new BorderLayout());
+
+        // HEADER
+        JPanel header = new JPanel(new BorderLayout());
+        header.setBackground(new Color(30, 41, 59));
+        header.setPreferredSize(new Dimension(1100, 80));
+
+        JLabel title = new JLabel("SMART STUDENT PLACEMENT MANAGER");
+        title.setForeground(Color.WHITE);
+        title.setFont(new Font("Arial", Font.BOLD, 24));
+        title.setBorder(BorderFactory.createEmptyBorder(10, 25, 0, 0));
+
+        JLabel subtitle = new JLabel(
+                "Smart Placement & Career Management System");
+        subtitle.setForeground(new Color(203, 213, 225));
+        subtitle.setFont(new Font("Arial", Font.PLAIN, 13));
+        subtitle.setBorder(BorderFactory.createEmptyBorder(0, 25, 10, 0));
+
+        JPanel titlePanel = new JPanel();
+        titlePanel.setBackground(new Color(30, 41, 59));
+        titlePanel.setLayout(new BoxLayout(titlePanel, BoxLayout.Y_AXIS));
+
+        titlePanel.add(title);
+        titlePanel.add(subtitle);
+
+        header.add(titlePanel, BorderLayout.WEST);
+        add(header, BorderLayout.NORTH);
+
+        // SIDEBAR
+        JPanel sidebar = new JPanel();
+        sidebar.setBackground(new Color(15, 23, 42));
+        sidebar.setPreferredSize(new Dimension(220, 570));
+        sidebar.setLayout(new GridLayout(8, 1, 0, 2));
+
+        JButton dashboardButton = createMenuButton("Dashboard");
+        JButton studentsButton = createMenuButton("Students");
+        JButton companiesButton = createMenuButton("Companies");
+        JButton applicationsButton = createMenuButton("Applications");
+        JButton careerButton = createMenuButton("Career Guide");
+        JButton skillGapButton = createMenuButton("Skill Gap");
+        JButton matchingButton = createMenuButton("Smart Matching");
+        JButton exitButton = createMenuButton("Exit");
+
+        sidebar.add(dashboardButton);
+        sidebar.add(studentsButton);
+        sidebar.add(companiesButton);
+        sidebar.add(applicationsButton);
+        sidebar.add(careerButton);
+        sidebar.add(skillGapButton);
+        sidebar.add(matchingButton);
+        sidebar.add(exitButton);
+
+        add(sidebar, BorderLayout.WEST);
+
+        // CONTENT
+        contentPanel = new JPanel();
+        contentPanel.setBackground(new Color(241, 245, 249));
+        contentPanel.setLayout(new BorderLayout());
+
+        add(contentPanel, BorderLayout.CENTER);
+
+        showDashboard();
+
+        // BUTTON ACTIONS
+
+        dashboardButton.addActionListener(e -> showDashboard());
+
+        studentsButton.addActionListener(e -> showMessage(
+                "Student Management",
+                "Student Management\n\n"
+                        + "Add Student\n"
+                        + "View Students\n"
+                        + "Search Student"));
+
+        companiesButton.addActionListener(e -> showMessage(
+                "Company Management",
+                "Company Management\n\n"
+                        + "Add Company\n"
+                        + "View Companies\n"
+                        + "Company Requirements"));
+
+        applicationsButton.addActionListener(e -> showMessage(
+                "Application Management",
+                "Application Management\n\n"
+                        + "Apply for Company\n"
+                        + "View Applications\n"
+                        + "Track Application Status"));
+
+        careerButton.addActionListener(e -> showMessage(
+                "Career Skill Recommender",
+                "Career Skill Recommender\n\n"
+                        + "Java Developer\n"
+                        + "Python Developer\n"
+                        + "Web Developer\n"
+                        + "Data Analyst\n"
+                        + "AI / ML Engineer\n"
+                        + "Software Tester"));
+
+        skillGapButton.addActionListener(e -> showMessage(
+                "Skill Gap Analyzer",
+                "The system compares your current skills\n"
+                        + "with the required company skills.\n\n"
+                        + "It identifies missing skills."));
+
+        matchingButton.addActionListener(e -> showMessage(
+                "Smart Company Matching",
+                "Matching is based on:\n\n"
+                        + "CGPA       : 40%\n"
+                        + "Skills     : 40%\n"
+                        + "Backlogs   : 20%\n\n"
+                        + "The system generates a match score."));
+
+        exitButton.addActionListener(e -> System.exit(0));
+    }
+
+    // DASHBOARD
+
+    private void showDashboard() {
+
+        contentPanel.removeAll();
+
+        JPanel dashboard = new JPanel();
+        dashboard.setBackground(new Color(241, 245, 249));
+        dashboard.setLayout(new BorderLayout(20, 20));
+        dashboard.setBorder(
+                BorderFactory.createEmptyBorder(25, 30, 25, 30));
+
+        JLabel heading = new JLabel("Placement Dashboard");
+        heading.setFont(new Font("Arial", Font.BOLD, 28));
+        heading.setForeground(new Color(15, 23, 42));
+
+        dashboard.add(heading, BorderLayout.NORTH);
+
+        // CARDS
+
+        JPanel cards = new JPanel();
+        cards.setBackground(new Color(241, 245, 249));
+        cards.setLayout(new GridLayout(1, 3, 20, 0));
+
+        cards.add(createCard("TOTAL STUDENTS", "25"));
+        cards.add(createCard("COMPANIES", "08"));
+        cards.add(createCard("SELECTED", "12"));
+
+        dashboard.add(cards, BorderLayout.CENTER);
+
+        // READINESS PANEL
+
+        JPanel bottom = new JPanel(new BorderLayout(20, 10));
+        bottom.setBackground(Color.WHITE);
+
+        bottom.setBorder(
+                BorderFactory.createCompoundBorder(
+                        BorderFactory.createLineBorder(
+                                new Color(226, 232, 240)),
+                        BorderFactory.createEmptyBorder(
+                                20, 20, 20, 20)));
+
+        JLabel readiness = new JLabel(
+                "Placement Readiness: 82%");
+        readiness.setFont(
+                new Font("Arial", Font.BOLD, 18));
+
+        JProgressBar progress = new JProgressBar(0, 100);
+        progress.setValue(82);
+        progress.setStringPainted(true);
+        progress.setString("82% Ready");
+        progress.setPreferredSize(
+                new Dimension(400, 35));
+
+        bottom.add(readiness, BorderLayout.WEST);
+        bottom.add(progress, BorderLayout.CENTER);
+
+        dashboard.add(bottom, BorderLayout.SOUTH);
+
+        contentPanel.add(dashboard, BorderLayout.CENTER);
+
+        contentPanel.revalidate();
+        contentPanel.repaint();
+    }
+
+    // CARD
+
+    private JPanel createCard(String title, String value) {
+
+        JPanel card = new JPanel();
+        card.setBackground(Color.WHITE);
+        card.setLayout(new BorderLayout());
+
+        card.setBorder(
+                BorderFactory.createCompoundBorder(
+                        BorderFactory.createLineBorder(
+                                new Color(226, 232, 240)),
+                        BorderFactory.createEmptyBorder(
+                                20, 20, 20, 20)));
+
+        JLabel titleLabel = new JLabel(title);
+        titleLabel.setForeground(
+                new Color(100, 116, 139));
+
+        titleLabel.setFont(
+                new Font("Arial", Font.BOLD, 13));
+
+        JLabel valueLabel = new JLabel(value);
+        valueLabel.setForeground(
+                new Color(15, 23, 42));
+
+        valueLabel.setFont(
+                new Font("Arial", Font.BOLD, 32));
+
+        card.add(titleLabel, BorderLayout.NORTH);
+        card.add(valueLabel, BorderLayout.CENTER);
+
+        return card;
+    }
+
+    // SIDEBAR BUTTON
+
+    private JButton createMenuButton(String text) {
+
+        JButton button = new JButton(text);
+
+        button.setForeground(Color.WHITE);
+        button.setBackground(new Color(15, 23, 42));
+
+        button.setFont(
+                new Font("Arial", Font.BOLD, 14));
+
+        button.setFocusPainted(false);
+        button.setBorderPainted(false);
+
+        button.setHorizontalAlignment(
+                SwingConstants.LEFT);
+
+        button.setBorder(
+                BorderFactory.createEmptyBorder(
+                        0, 25, 0, 0));
+
+        return button;
+    }
+
+    // MESSAGE BOX
+
+    private void showMessage(
+            String title,
+            String message) {
+
+        JOptionPane.showMessageDialog(
+                this,
+                message,
+                title,
+                JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    // MAIN METHOD
+
+    public static void main(String[] args) {
+
+        SwingUtilities.invokeLater(() -> {
+
+            PlacementGUI gui =
+                    new PlacementGUI();
+
+            gui.setVisible(true);
+        });
+    }
+}
+public class PlacementManager{
+    private java.util.ArrayList<Student> students;
+private java.util.ArrayList<Company> companies;
+private java.util.ArrayList<Application> applications;
+
+public PlacementManager() {
+    students = new java.util.ArrayList<>();
+    companies = new java.util.ArrayList<>();
+    applications = new java.util.ArrayList<>();
+}
+
+// =====================================================
+// STUDENT METHODS
+// =====================================================
+
+public void addStudent(Student student) {
+    students.add(student);
+    System.out.println("Student added successfully.");
+}
+
+public void displayStudents() {
+
+    if (students.isEmpty()) {
+        System.out.println("No students found.");
+        return;
+    }
+
+    System.out.println();
+    System.out.println("======================================");
+    System.out.println("           STUDENT LIST");
+    System.out.println("======================================");
+
+    for (Student student : students) {
+        student.displayStudent();
+    }
+}
+
+public Student findStudent(int studentId) {
+
+    for (Student student : students) {
+        if (student.getStudentId() == studentId) {
+            return student;
+        }
+    }
+
+    return null;
+}
+
+// =====================================================
+// COMPANY METHODS
+// =====================================================
+
+public void addCompany(Company company) {
+    companies.add(company);
+    System.out.println("Company added successfully.");
+}
+
+public void displayCompanies() {
+
+    if (companies.isEmpty()) {
+        System.out.println("No companies found.");
+        return;
+    }
+
+    System.out.println();
+    System.out.println("======================================");
+    System.out.println("           COMPANY LIST");
+    System.out.println("======================================");
+
+    for (Company company : companies) {
+        company.displayCompany();
+    }
+}
+
+public Company findCompany(int companyId) {
+
+    for (Company company : companies) {
+        if (company.getCompanyId() == companyId) {
+            return company;
+        }
+    }
+
+    return null;
+}
+
+// =====================================================
+// APPLICATION METHODS
+// =====================================================
+
+public void addApplication(Application application) {
+    applications.add(application);
+    System.out.println("Application submitted successfully.");
+}
+
+public void displayApplications() {
+
+    if (applications.isEmpty()) {
+        System.out.println("No applications found.");
+        return;
+    }
+
+    System.out.println();
+    System.out.println("======================================");
+    System.out.println("         APPLICATION LIST");
+    System.out.println("======================================");
+
+    for (Application application : applications) {
+        application.displayApplication();
+    }
+}
+
+// =====================================================
+// UPDATE APPLICATION STATUS
+// =====================================================
+
+public void updateApplicationStatus(int applicationId, String newStatus) {
+
+    for (Application application : applications) {
+
+        if (application.getApplicationId() == applicationId) {
+
+            application.setStatus(newStatus);
+
+            System.out.println();
+            System.out.println("======================================");
+            System.out.println("     APPLICATION STATUS UPDATED");
+            System.out.println("======================================");
+            System.out.println("Application ID : " + applicationId);
+            System.out.println("New Status     : " + newStatus);
+            System.out.println("======================================");
+
+            return;
+        }
+    }
+
+    System.out.println("Application not found.");
+}
+
+// =====================================================
+// SMART COMPANY MATCH
+// =====================================================
+
+public void calculateMatch(int studentId, int companyId) {
+
+    Student student = findStudent(studentId);
+    Company company = findCompany(companyId);
+
+    if (student == null) {
+        System.out.println("Student not found.");
+        return;
+    }
+
+    if (company == null) {
+        System.out.println("Company not found.");
+        return;
+    }
+
+    int score = 0;
+
+    // CGPA = 40 points
+    if (student.getCgpa() >= company.getMinimumCgpa()) {
+        score += 40;
+    }
+
+    // Skill = 40 points
+    if (student.getSkills() != null &&
+        student.getSkills().toLowerCase()
+        .contains(company.getRequiredSkill().toLowerCase())) {
+
+        score += 40;
+    }
+
+    // Backlogs = 20 points
+    if (student.getBacklogs() <= company.getMaximumBacklogs()) {
+        score += 20;
+    }
+
+    System.out.println();
+    System.out.println("======================================");
+    System.out.println("          SMART COMPANY MATCH");
+    System.out.println("======================================");
+
+    System.out.println("Student : " + student.getName());
+    System.out.println("Company : " + company.getCompanyName());
+    System.out.println("Role    : " + company.getJobRole());
+    System.out.println("Match   : " + score + "%");
+
+    if (score >= 80) {
+        System.out.println("Result  : ELIGIBLE");
+    }
+    else if (score >= 50) {
+        System.out.println("Result  : PARTIALLY MATCHED");
+    }
+    else {
+        System.out.println("Result  : NOT ELIGIBLE");
+    }
+
+    System.out.println("======================================");
+}
+
+// =====================================================
+// SKILL GAP ANALYZER
+// =====================================================
+
+public void analyzeSkillGap(int studentId, int companyId) {
+
+    Student student = findStudent(studentId);
+    Company company = findCompany(companyId);
+
+    if (student == null) {
+        System.out.println("Student not found.");
+        return;
+    }
+
+    if (company == null) {
+        System.out.println("Company not found.");
+        return;
+    }
+
+    System.out.println();
+    System.out.println("======================================");
+    System.out.println("          SKILL GAP ANALYZER");
+    System.out.println("======================================");
+
+    System.out.println("Student : " + student.getName());
+    System.out.println("Company : " + company.getCompanyName());
+    System.out.println("Required Skill : " + company.getRequiredSkill());
+
+    if (student.getSkills() != null &&
+        student.getSkills().toLowerCase()
+        .contains(company.getRequiredSkill().toLowerCase())) {
+
+        System.out.println("Status : Skill requirement satisfied.");
+
+    } else {
+
+        System.out.println("Status : Skill gap detected.");
+        System.out.println(
+            "Recommendation : Learn "
+            + company.getRequiredSkill()
+        );
+    }
+
+    System.out.println("======================================");
+}
+
+// =====================================================
+// PLACEMENT READINESS SCORE
+// =====================================================
+
+public void calculateReadinessScore(int studentId) {
+
+    Student student = findStudent(studentId);
+
+    if (student == null) {
+        System.out.println("Student not found.");
+        return;
+    }
+
+    int score = 0;
+
+    // CGPA - 40 points
+    if (student.getCgpa() >= 8.5) {
+        score += 40;
+    }
+    else if (student.getCgpa() >= 7.0) {
+        score += 30;
+    }
+    else if (student.getCgpa() >= 6.0) {
+        score += 20;
+    }
+    else {
+        score += 10;
+    }
+
+    // Skills - 40 points
+    String skills = student.getSkills();
+
+    if (skills != null && !skills.trim().isEmpty()) {
+
+        String[] skillList = skills.split(",");
+
+        if (skillList.length >= 4) {
+            score += 40;
+        }
+        else if (skillList.length >= 2) {
+            score += 30;
+        }
+        else {
+            score += 20;
+        }
+    }
+
+    // Backlogs - 20 points
+    if (student.getBacklogs() == 0) {
+        score += 20;
+    }
+    else if (student.getBacklogs() <= 2) {
+        score += 10;
+    }
+
+    System.out.println();
+    System.out.println("======================================");
+    System.out.println("       PLACEMENT READINESS SCORE");
+    System.out.println("======================================");
+
+    System.out.println("Student : " + student.getName());
+    System.out.println("Score   : " + score + "/100");
+
+    if (score >= 80) {
+        System.out.println("Level   : HIGHLY READY");
+    }
+    else if (score >= 60) {
+        System.out.println("Level   : MODERATELY READY");
+    }
+    else {
+        System.out.println("Level   : NEEDS IMPROVEMENT");
+    }
+
+    System.out.println("======================================");
+}
+
+// =====================================================
+// PLACEMENT DASHBOARD
+// =====================================================
+
+public void displayDashboard() {
+
+    int applied = 0;
+    int shortlisted = 0;
+    int selected = 0;
+    int rejected = 0;
+
+    for (Application application : applications) {
+
+        String status = application.getStatus();
+
+        if (status == null) {
+            continue;
+        }
+
+        if (status.equalsIgnoreCase("Applied")) {
+            applied++;
+        }
+        else if (status.equalsIgnoreCase("Shortlisted")) {
+            shortlisted++;
+        }
+        else if (status.equalsIgnoreCase("Selected")) {
+            selected++;
+        }
+        else if (status.equalsIgnoreCase("Rejected")) {
+            rejected++;
+        }
+    }
+
+    System.out.println();
+    System.out.println("======================================");
+    System.out.println("          PLACEMENT DASHBOARD");
+    System.out.println("======================================");
+
+    System.out.println("Total Students    : " + students.size());
+    System.out.println("Total Companies   : " + companies.size());
+    System.out.println("Total Applications: " + applications.size());
+
+    System.out.println();
+    System.out.println("APPLICATION STATUS");
+    System.out.println("--------------------------------------");
+
+    System.out.println("Applied           : " + applied);
+    System.out.println("Shortlisted       : " + shortlisted);
+    System.out.println("Selected          : " + selected);
+    System.out.println("Rejected          : " + rejected);
+
+    System.out.println("======================================");
+}
+
+// =====================================================
+// CAREER RECOMMENDER
+// =====================================================
+
+public void careerRecommender(int studentId) {
+
+    Student student = findStudent(studentId);
+
+    if (student == null) {
+        System.out.println("Student not found.");
+        return;
+    }
+
+    String skills = student.getSkills();
+
+    if (skills == null) {
+        skills = "";
+    }
+
+    skills = skills.toLowerCase();
+
+    System.out.println();
+    System.out.println("======================================");
+    System.out.println("       CAREER SKILL RECOMMENDER");
+    System.out.println("======================================");
+
+    System.out.println("Student : " + student.getName());
+    System.out.println();
+
+    boolean found = false;
+
+    if (skills.contains("java")) {
+
+        System.out.println("Career : Java Developer");
+        System.out.println("Learn  : Spring Boot, SQL, Git");
+        System.out.println();
+
+        found = true;
+    }
+
+    if (skills.contains("python")) {
+
+        System.out.println("Career : Python Developer");
+        System.out.println("Learn  : Django, Flask, SQL");
+        System.out.println();
+
+        found = true;
+    }
+
+    if (skills.contains("html") ||
+        skills.contains("css")) {
+
+        System.out.println("Career : Web Developer");
+        System.out.println("Learn  : JavaScript, React, Node.js");
+        System.out.println();
+
+        found = true;
+    }
+
+    if (skills.contains("sql")) {
+
+        System.out.println("Career : Data Analyst");
+        System.out.println("Learn  : Excel, Power BI, Python");
+        System.out.println();
+
+        found = true;
+    }
+
+    if (!found) {
+
+        System.out.println("No specific career recommendation found.");
+        System.out.println();
+        System.out.println("Start learning:");
+        System.out.println("Java / Python / SQL / HTML / CSS");
+    }
+
+    System.out.println("======================================");
+}
+}
+public class Student {
+
+    private int studentId;
+    private String name;
+    private String branch;
+    private double cgpa;
+    private String skills;
+    private int backlogs;
+
+    // Constructor
+    public Student(int studentId, String name, String branch,
+                   double cgpa, String skills, int backlogs) {
+
+        this.studentId = studentId;
+        this.name = name;
+        this.branch = branch;
+        this.cgpa = cgpa;
+        this.skills = skills;
+        this.backlogs = backlogs;
+    }
+
+    // Getters
+    public int getStudentId() {
+        return studentId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getBranch() {
+        return branch;
+    }
+
+    public double getCgpa() {
+        return cgpa;
+    }
+
+    public String getSkills() {
+        return skills;
+    }
+
+    public int getBacklogs() {
+        return backlogs;
+    }
+
+    // Display student details
+    public void displayStudent() {
+
+        System.out.println("----------------------------------");
+        System.out.println("Student ID : " + studentId);
+        System.out.println("Name       : " + name);
+        System.out.println("Branch     : " + branch);
+        System.out.println("CGPA       : " + cgpa);
+        System.out.println("Skills     : " + skills);
+        System.out.println("Backlogs   : " + backlogs);
+        System.out.println("----------------------------------");
+    }
+}
+
+Output:
+PS C:\Users\DELL\OneDrive\Desktop\SmartStudentPlacementManager>javac *.java
+PS C:\Users\DELL\OneDrive\Desktop\SmartStudentPlacementManager>java Main
+
+========================================
+     SMART STUDENT PLACEMENT MANAGER
+========================================
+1. Add Student
+2. View Students
+3. Add Company
+4. View Companies
+5. Smart Company Match
+6. Skill Gap Analyzer
+7. Placement Readiness Score
+8. Apply for Company
+9. View Applications
+10. Update Application Status
+11. Placement Dashboard
+12. Career Skill Recommender
+13. Exit
+
+Enter your choice: 1
+
+===== ADD STUDENT =====
+Enter Student ID: 1
+Enter Name: Rutu
+Enter Branch: CSE
+Enter CGPA: 9
+Enter Skills (comma separated): python,java,html,css,react
+Enter Number of Backlogs: 0
+Student added successfully.
+
+========================================
+     SMART STUDENT PLACEMENT MANAGER
+========================================
+1. Add Student
+2. View Students
+3. Add Company
+4. View Companies
+5. Smart Company Match
+6. Skill Gap Analyzer
+7. Placement Readiness Score
+8. Apply for Company
+9. View Applications
+10. Update Application Status
+11. Placement Dashboard
+12. Career Skill Recommender
+13. Exit
+
+Enter your choice: 2
+
+======================================
+           STUDENT LIST
+======================================
+----------------------------------
+Student ID : 1
+Name       : Rutu
+Branch     : CSE
+CGPA       : 9.0
+Skills     : python,java,html,css,react
+Backlogs   : 0
+----------------------------------
+
+========================================
+     SMART STUDENT PLACEMENT MANAGER
+========================================
+1. Add Student
+2. View Students
+3. Add Company
+4. View Companies
+5. Smart Company Match
+6. Skill Gap Analyzer
+7. Placement Readiness Score
+8. Apply for Company
+9. View Applications
+10. Update Application Status
+11. Placement Dashboard
+12. Career Skill Recommender
+13. Exit
+
+Enter your choice: 3
+
+===== ADD COMPANY =====
+Enter Company ID: 2
+Enter Company Name: Emitech
+Enter Job Role: Web developer
+Enter Minimum CGPA: 8    
+Enter Required Skill: python,java,html,css,react
+Enter Maximum Backlogs Allowed: 0
+Enter Package (LPA): 99
+Company added successfully.
+
+========================================
+     SMART STUDENT PLACEMENT MANAGER
+========================================
+1. Add Student
+2. View Students
+3. Add Company
+4. View Companies
+5. Smart Company Match
+6. Skill Gap Analyzer
+7. Placement Readiness Score
+8. Apply for Company
+9. View Applications
+10. Update Application Status
+11. Placement Dashboard
+12. Career Skill Recommender
+13. Exit
+
+Enter your choice: 4
+
+======================================
+           COMPANY LIST
+======================================
+----------------------------------
+Company ID       : 2
+Company Name     : Emitech
+Job Role         : Web developer
+Minimum CGPA     : 8.0
+Required Skill   : python,java,html,css,react
+Maximum Backlogs : 0
+Package          : 99.0 LPA
+----------------------------------
+
+========================================
+     SMART STUDENT PLACEMENT MANAGER
+========================================
+1. Add Student
+2. View Students
+3. Add Company
+4. View Companies
+5. Smart Company Match
+6. Skill Gap Analyzer
+7. Placement Readiness Score
+8. Apply for Company
+9. View Applications
+10. Update Application Status
+11. Placement Dashboard
+12. Career Skill Recommender
+13. Exit
+
+Enter your choice: 5
+
+===== SMART COMPANY MATCH =====
+Enter Student ID: 1
+Enter Company ID: 2
+
+======================================
+          SMART COMPANY MATCH
+======================================
+Student : Rutu
+Company : Emitech
+Role    : Web developer
+Match   : 100%
+Result  : ELIGIBLE
+======================================
+
+========================================
+     SMART STUDENT PLACEMENT MANAGER
+========================================
+1. Add Student
+2. View Students
+3. Add Company
+4. View Companies
+5. Smart Company Match
+6. Skill Gap Analyzer
+7. Placement Readiness Score
+8. Apply for Company
+9. View Applications
+10. Update Application Status
+11. Placement Dashboard
+12. Career Skill Recommender
+13. Exit
+
+Enter your choice: 6
+
+===== SKILL GAP ANALYZER =====
+Enter Student ID: 1
+Enter Company ID: 2
+
+======================================
+          SKILL GAP ANALYZER
+======================================
+Student : Rutu
+Company : Emitech
+Required Skill : python,java,html,css,react
+Status : Skill requirement satisfied.
+======================================
+
+========================================
+     SMART STUDENT PLACEMENT MANAGER
+========================================
+1. Add Student
+2. View Students
+3. Add Company
+4. View Companies
+5. Smart Company Match
+6. Skill Gap Analyzer
+7. Placement Readiness Score
+8. Apply for Company
+9. View Applications
+10. Update Application Status
+11. Placement Dashboard
+12. Career Skill Recommender
+13. Exit
+
+Enter your choice: 7
+
+===== PLACEMENT READINESS =====
+Enter Student ID: 1
+
+======================================
+       PLACEMENT READINESS SCORE
+======================================
+Student : Rutu
+Score   : 100/100
+Level   : HIGHLY READY
+======================================
+
+========================================
+     SMART STUDENT PLACEMENT MANAGER
+========================================
+1. Add Student
+2. View Students
+3. Add Company
+4. View Companies
+5. Smart Company Match
+6. Skill Gap Analyzer
+7. Placement Readiness Score
+8. Apply for Company
+9. View Applications
+10. Update Application Status
+11. Placement Dashboard
+12. Career Skill Recommender
+13. Exit
+
+Enter your choice: 8
+
+===== APPLY FOR COMPANY =====
+Enter Application ID: 3
+Enter Student ID: 1
+Enter Company ID: 2
+Application submitted successfully.
+
+========================================
+     SMART STUDENT PLACEMENT MANAGER
+========================================
+1. Add Student
+2. View Students
+3. Add Company
+4. View Companies
+5. Smart Company Match
+6. Skill Gap Analyzer
+7. Placement Readiness Score
+8. Apply for Company
+9. View Applications
+10. Update Application Status
+11. Placement Dashboard
+12. Career Skill Recommender
+13. Exit
+
+Enter your choice: 9
+
+======================================
+         APPLICATION LIST
+======================================
+
+------------------------------
+Application ID : 3
+Student ID     : 1
+Company ID     : 2
+Status         : Applied
+------------------------------
+
+========================================
+     SMART STUDENT PLACEMENT MANAGER
+========================================
+1. Add Student
+2. View Students
+3. Add Company
+4. View Companies
+5. Smart Company Match
+6. Skill Gap Analyzer
+7. Placement Readiness Score
+8. Apply for Company
+9. View Applications
+10. Update Application Status
+11. Placement Dashboard
+12. Career Skill Recommender
+13. Exit
+
+Enter your choice: 10
+
+===== UPDATE APPLICATION STATUS =====
+Enter Application ID: 3
+
+Select New Status:
+1. Applied
+2. Shortlisted
+3. Selected
+4. Rejected
+
+Enter your choice: 3
+
+======================================
+     APPLICATION STATUS UPDATED
+======================================
+Application ID : 3
+New Status     : Selected
+======================================
+
+========================================
+     SMART STUDENT PLACEMENT MANAGER
+========================================
+1. Add Student
+2. View Students
+3. Add Company
+4. View Companies
+5. Smart Company Match
+6. Skill Gap Analyzer
+7. Placement Readiness Score
+8. Apply for Company
+9. View Applications
+10. Update Application Status
+11. Placement Dashboard
+12. Career Skill Recommender
+13. Exit
+
+Enter your choice: 11
+
+======================================
+          PLACEMENT DASHBOARD
+======================================
+Total Students    : 1
+Total Companies   : 1
+Total Applications: 1
+
+APPLICATION STATUS
+--------------------------------------
+Applied           : 0
+Shortlisted       : 0
+Selected          : 1
+Rejected          : 0
+======================================
+
+========================================
+     SMART STUDENT PLACEMENT MANAGER
+========================================
+1. Add Student
+2. View Students
+3. Add Company
+4. View Companies
+5. Smart Company Match
+6. Skill Gap Analyzer
+7. Placement Readiness Score
+8. Apply for Company
+9. View Applications
+10. Update Application Status
+11. Placement Dashboard
+12. Career Skill Recommender
+13. Exit
+
+Enter your choice: 12
+
+========================================
+       CAREER SKILL RECOMMENDER
+========================================
+
+Choose your career goal:
+1. Java Developer
+2. Python Developer
+3. Web Developer
+4. Data Analyst
+5. AI / ML Engineer
+6. Software Tester
+
+Enter your choice: 3
+
+========================================
+CAREER: WEB DEVELOPER
+
+Recommended Skills:
+1. HTML
+2. CSS
+3. JavaScript
+4. Responsive Design
+5. Git & GitHub
+6. React
+7. Basic Backend
+
+Suggested Learning Order:
+HTML -> CSS -> JavaScript -> Git -> React -> Backend
+
+========================================
+
+========================================
+     SMART STUDENT PLACEMENT MANAGER
+========================================
+1. Add Student
+2. View Students
+3. Add Company
+4. View Companies
+5. Smart Company Match
+6. Skill Gap Analyzer
+7. Placement Readiness Score
+8. Apply for Company
+9. View Applications
+10. Update Application Status
+11. Placement Dashboard
+12. Career Skill Recommender
+13. Exit
+
+Enter your choice: 13
+
+Thank you for using
+Smart Student Placement Manager!
+PS C:\Users\DELL\OneDrive\Desktop\SmartStudentPlacementManager>
+
+
+
+
